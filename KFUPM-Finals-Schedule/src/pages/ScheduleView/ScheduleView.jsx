@@ -34,7 +34,6 @@ function Schedule() {
           throw new Error("Unexpected response format");
         }
       } catch (err) {
-        console.error(err);
         setError("Failed to fetch data or invalid data format.");
       } finally {
         setLoading(false);

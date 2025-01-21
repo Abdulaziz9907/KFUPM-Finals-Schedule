@@ -41,10 +41,9 @@ app.get("/api/schedule", cacheMiddleware, async (req, res) => {
       data: response.data?.data || [],
     });
   } catch (error) {
-    console.error(error);
     res.status(500).send("Error fetching data");
   }
 });
 
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT);

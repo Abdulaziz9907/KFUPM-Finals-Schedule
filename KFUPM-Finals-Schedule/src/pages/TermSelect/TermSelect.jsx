@@ -25,12 +25,10 @@ function TermSelect() {
         newTermCode;
       setTermURL(newTermURL);
 
-      console.log("success:", newTermCode);
-      console.log(newTermURL);
+  
 
       navigate("/Schedule-view", { state: { termCode: newTermCode, termURL: newTermURL } });
     } else {
-      console.log("Error: Term length must be 3 characters.");
       
       setTerm("");
       setTermCode("");
