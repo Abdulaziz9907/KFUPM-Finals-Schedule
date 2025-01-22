@@ -10,6 +10,8 @@ function Schedule() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
+
   const year = useMemo(() => termCode?.slice(0, 4), [termCode]);
   const word = useMemo(() => {
     const termDigit = parseInt(termCode?.charAt(4));
@@ -21,6 +23,19 @@ function Schedule() {
     const period = hours >= 12 ? "PM" : "AM";
     const adjustedHours = hours % 12 || 12;
     return `${adjustedHours}:${String(minutes).padStart(2, "0")} ${period}`;
+  }
+  function convertTo24HourFormat(time) {
+    const [hours, minutes] = time.split(":").map(Number);
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+  }
+
+  function convertDateFormat(date) {
+    const [day, month, year] = date.split("-");
+    const months = {
+      Jan: "01", Feb: "02", Mar: "03", Apr: "04", May: "05", Jun: "06", Jul: "07",
+      Aug: "08", Sep: "09", Oct: "10", Nov: "11", Dec: "12"
+    };
+    return `${year}-${months[month]}-${day}`;
   }
 
 
@@ -177,17 +192,17 @@ function Schedule() {
       <td>
         <div className="form-control">
           <label className="cursor-pointer label">
-            <input type="checkbox" className="checkbox checkbox-success" />
+          <input type="checkbox" aria-label="Add" className="btn" />
+
           </label>
         </div>
 
-
 <add-to-calendar-button 
-  name={`Exam for ${item.course_title}`}
-  description={`Final exam for ${item.course_title}`}
-  startDate="2025-02-06"
-  startTime={`00:00`}
-  endTime="17:45"
+  name={`Exam for ${item.course_number}`}
+  description={`Final exam for ${item.course_title}. Note that the endtime is not available refer to your intructor for more details`}
+  startDate={`${convertDateFormat(item.date)}`}
+  startTime={`${convertTo24HourFormat(item.time)}`}
+  endTime={`${convertTo24HourFormat(item.time)}`}
   timeZone="Asia/Riyadh"
   location={item.location}
   options="'Apple'"
