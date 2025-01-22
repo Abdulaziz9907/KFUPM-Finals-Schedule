@@ -24,7 +24,7 @@ function Schedule() {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/api/schedule", {
+        const response = await axios.get("https://kfupm-finals-schedule.onrender.com/api/schedule", {
           params: { term_code: termCode },
         });
 
