@@ -11,6 +11,7 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "add-to-calendar-button": "^2.8.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "ics": "^3.8.1",
