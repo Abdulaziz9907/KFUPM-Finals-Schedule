@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import 'add-to-calendar-button';
+import "./ScheduleView.css"
 
 function Schedule() {
   const location = useLocation();
@@ -175,9 +176,10 @@ function Schedule() {
           )}
     </tr>
   </thead>
-  <tbody id="table_element" className="hover">
+  <tbody id="table_all_elements" className="hover">
   {data.map((item, index) => (
-    <tr className="hover" key={index}>
+    <div id="element_cutomize">
+    <tr className="hover" id="table_element" key={index}>
       {Object.entries(item)
         .filter(([key]) => key !== "period") // Exclude "period" column
         .map(([key, value], idx) =>
@@ -198,8 +200,8 @@ function Schedule() {
         </div>
 
 <add-to-calendar-button 
-  name={`Exam for ${item.course_number}`}
-  description={`Final exam for ${item.course_title}. Note that the endtime is not available refer to your intructor for more details`}
+  name={`${item.course_number} Final exam`}
+  description={`Final exam for ${item.course_title}. Note that the endtime is not available, refer to your intructor for more details`}
   startDate={`${convertDateFormat(item.date)}`}
   startTime={`${convertTo24HourFormat(item.time)}`}
   endTime={`${convertTo24HourFormat(item.time)}`}
@@ -218,6 +220,7 @@ function Schedule() {
 
       </td>
     </tr>
+    </div>
   ))}
 </tbody>
 
