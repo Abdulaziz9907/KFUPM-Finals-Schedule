@@ -1,0 +1,27 @@
+.schedule-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.fixed-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-bottom: 10px;
+}
+
+.table thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    width: 100%;
+}
+
+.scrollable-table-container {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+
+#table_element {}
