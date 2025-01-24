@@ -1,4 +1,3 @@
-
 import express from "express";
 import axios from "axios";
 import cors from "cors";
@@ -8,6 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Optimized in-memory cache
 const cache = new Map();
 
 const cacheMiddleware = (req, res, next) => {
@@ -15,10 +15,10 @@ const cacheMiddleware = (req, res, next) => {
   if (cache.has(key)) {
     return res.json(cache.get(key));
   }
-  res.sendResponse = res.json;
+  const originalJson = res.json.bind(res);
   res.json = (body) => {
-    cache.set(key, body);
-    res.sendResponse(body);
+    cache.set(key, body); // Cache the response
+    originalJson(body);
   };
   next();
 };
@@ -33,9 +33,7 @@ app.get("/api/schedule", cacheMiddleware, async (req, res) => {
 
     const response = await axios.get(
       "https://registrar.kfupm.edu.sa/api/final-examination-schedule",
-      {
-        params: req.query,
-      }
+      { params: req.query }
     );
 
     res.json({
@@ -48,4 +46,4 @@ app.get("/api/schedule", cacheMiddleware, async (req, res) => {
 });
 
 const PORT = 5000;
-app.listen(PORT);
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
