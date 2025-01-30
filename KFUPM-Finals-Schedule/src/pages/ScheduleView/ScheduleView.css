@@ -2,26 +2,51 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .fixed-header {
     position: sticky;
     top: 0;
-    z-index: 10;
-    padding-bottom: 10px;
+    z-index: 50;
+    background-color: #1f2937;
+    /* bg-gray-800 */
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+
 }
 
-.table thead {
+.table-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    border-radius: 25px;
+
+}
+
+.table-wrapper {
+    height: 100%;
+    overflow-y: auto;
+
+}
+
+table thead {
     position: sticky;
     top: 0;
-    z-index: 5;
-    width: 100%;
+    z-index: 40;
+    background-color: #374151;
+    /* bg-gray-700 */
+    border-radius: 25px;
+
 }
 
-.scrollable-table-container {
-    flex-grow: 1;
-    overflow-y: auto;
+table tbody {
+    position: relative;
+
 }
 
-
-#table_element {}
+tr:hover {
+    background-color: #4b5563;
+    /* bg-gray-600 */
+}
